@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const tweetSchema = mongoose.Schema(
   {
@@ -16,6 +16,6 @@ const tweetSchema = mongoose.Schema(
 );
 
 const Tweet = mongoose.model("Tweet", tweetSchema); //creating model
-module.exports = Tweet;
+export default Tweet;
 
 //mongoose will make Tweet plural, we dont need to kdo that

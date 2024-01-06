@@ -1,8 +1,7 @@
-const express = require("express");
-const connect = require("./config/database");
-const app = express();
+import express from "express";
+import connect from "./config/database.js";
 
-const Tweet = require("./models/tweet");
+const app = express();
 
 app.listen(3010, async () => {
   console.log("Server started at 3010");

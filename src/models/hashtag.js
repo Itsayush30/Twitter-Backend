@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const hashtagSchema = mongoose.Schema(
   {
@@ -15,6 +15,6 @@ const hashtagSchema = mongoose.Schema(
 );
 
 const Hashtag = mongoose.model("Hashtag", hashtagSchema); //creating model
-module.exports = Hashtag;
+export default Hashtag;
 
 //mongoose will make Tweet plural, we dont need to kdo that
