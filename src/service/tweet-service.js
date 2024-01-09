@@ -7,21 +7,26 @@ class TweetService {
   }
 
   async create(data) {
-    const contant = data.contant;
-    const tags = contant.match(/#[a-zA-Z0-9_]+/g); //this regex extracts hashtags
-    tags = tags.map((tag) => tag.substring(1)).map((tag) => tag.toLowerCase());
+    console.log("Service", data);
+    const content = data.content;
+    const tags = content
+      .match(/#[a-zA-Z0-9_]+/g)
+      .map((tag) => tag.substring(1))
+      .map((tag) => tag.toLowerCase());
+    //this regex extracts hashtags
     console.log(tags);
     const tweet = await this.tweetRepository.create(data);
 
-    let alreadyPresentTags = await this.hashtagRepository.findByName(tags);
+    let alreadyPresentTags = await this.hashtagRepository.findByTitle(tags);
     let titleOfpresentTags = alreadyPresentTags.map((tags) => tags.title);
     let newTags = tags.filter((tag) => !titleOfpresentTags.includes(tag));
     newTags = newTags.map((tag) => {
-      return { title: tag, tweet: [tweet.id] };
+      return { title: tag, tweets: [tweet.id] };
     });
     await this.hashtagRepository.bulkCreate(newTags);
     alreadyPresentTags.forEach((tag) => {
-      tag.tweet.push(tweet.id);
+      console.log("forEach", tag, tweet.id);
+      tag.tweets.push(tweet.id);
       tag.save(); //document.save()
     });
 

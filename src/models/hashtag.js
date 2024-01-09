@@ -7,10 +7,12 @@ const hashtagSchema = mongoose.Schema(
       required: true,
       unique: true,
     },
-    tweet: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "tweets",
-    },
+    tweets: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "tweets",
+      },
+    ],
   },
   { timestamps: true }
 );
