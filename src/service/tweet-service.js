@@ -9,7 +9,7 @@ class TweetService {
   async create(data) {
     const contant = data.contant;
     const tags = contant.match(/#[a-zA-Z0-9_]+/g); //this regex extracts hashtags
-    tags = tags.map((tag) => tag.substring(1));
+    tags = tags.map((tag) => tag.substring(1)).map((tag) => tag.toLowerCase());
     console.log(tags);
     const tweet = await this.tweetRepository.create(data);
 
@@ -22,7 +22,7 @@ class TweetService {
     await this.hashtagRepository.bulkCreate(newTags);
     alreadyPresentTags.forEach((tag) => {
       tag.tweet.push(tweet.id);
-      tag.save();
+      tag.save(); //document.save()
     });
 
     return tweet;
