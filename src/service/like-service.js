@@ -8,7 +8,8 @@ class LikeService {
 
   async toggleLike(modelType, modelId, userId) {
     if (modelType == "Tweet") {
-      const tweetDocument = await this.tweetRepository.find(modelId);
+      var tweetDocument = await this.tweetRepository.find(modelId);
+      console.log(tweetDocument, "here");
     } else if (modelType == "Comment") {
       //TODO
     } else {
@@ -21,11 +22,13 @@ class LikeService {
       onModel: modelType,
       likeable: modelId,
     });
+
     if (likeAlreadyExists) {
+      console.log("likeObj", likeAlreadyExists);
       tweetDocument.likes.pull(likeAlreadyExists.id);
-      tweetDocument.save();
-      likeAlreadyExists.remove();
-      var isAdded = false;
+      await tweetDocument.save();
+      await likeAlreadyExists.deleteOne();
+      return "Disliked";
     } else {
       const newLike = await this.likeRepository.create({
         user: userId,
@@ -34,7 +37,7 @@ class LikeService {
       });
       tweetDocument.likes.push(newLike.id);
       tweetDocument.save();
-      var isAdded = true;
+      return "liked";
     }
   }
 }
