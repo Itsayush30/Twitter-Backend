@@ -12,6 +12,7 @@ const likeSchema = new mongoose.Schema(
       required: true,
       refPath: "onModel",
     },
+    //likeable will have tweet id or comment id
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
