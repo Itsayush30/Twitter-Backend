@@ -5,7 +5,6 @@ class CommentService {
     this.commentRepository = new CommentRepository();
     this.tweetRepository = new TweetRepository();
   }
-
   async create(modelId, modelType, userId, content) {
     if (modelType == "Tweet") {
       console.log("inside model type");
