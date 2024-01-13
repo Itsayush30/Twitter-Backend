@@ -8,7 +8,7 @@ import { authenticate } from "../../middlewares/authentication.js";
 const router = express.Router();
 
 // /api/v1/tweets POST
-router.post("/tweets", authenticate, createTweet);
+router.post("/tweets", createTweet);
 router.get("/tweets/:id", getTweet);
 router.post("/likes/toggle", toggleLike);
 router.post("/comments", authenticate, createComment);

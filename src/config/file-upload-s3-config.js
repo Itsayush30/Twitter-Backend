@@ -21,7 +21,7 @@ const upload = multer({
     metadata: function (req, file, cb) {
       cb(null, { fieldName: file.fieldname });
     },
-    key: function (req, res, cb) {
+    key: function (req, file, cb) {
       cb(null, Date.now().toString());
     },
   }),
