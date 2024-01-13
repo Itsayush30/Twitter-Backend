@@ -9,6 +9,7 @@ export const authenticate = (req, res, next) => {
       });
     }
     req.user = user;
+    console.log("reading",req.user.id);
     next();
   })(req, res, next);
 };
