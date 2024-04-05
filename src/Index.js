@@ -16,8 +16,8 @@ passportAuth(passport);
 
 app.use("/api", apiRoutes);
 
-app.listen(3010, async () => {
-  console.log("Server started at 3010");
+app.listen(3000, async () => {
+  console.log("Server started at 3000");
   await connect();
   console.log("Mongo db connected");
 });
